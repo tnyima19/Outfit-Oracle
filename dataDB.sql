@@ -1,28 +1,42 @@
--- Insert a user into the USERS table
-INSERT INTO USERS (email, password) VALUES ('user@example.com', 'securepassword123');
-INSERT INTO USERS (email, password) VALUES ('seller@example.com', 'sellerpassword456');
-INSERT INTO USERS (email, password) VALUES ('buyer@example.com', 'buyerpassword789');
+-- DB NAME: outfitoracleDB
+CREATE TABLE users (
+    email VARCHAR(255) PRIMARY KEY,
+    password VARCHAR(255) NOT NULL
+);
 
--- Add a product to the PRODUCTS table
-INSERT INTO PRODUCTS (description, title, category, styles, email) 
-VALUES ('A green t-shirt with eco print', 'Green T-Shirt', ARRAY['clothing', 'casual'], ARRAY['vintage', 'cotton'], 'seller@example.com');
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    description VARCHAR(255),
+    title VARCHAR(255),
+    category VARCHAR(255)[],
+    styles VARCHAR(255)[],
+    email VARCHAR(255) REFERENCES users(email) ON DELETE CASCADE
+);
 
--- We must fetch the product_id after it's been inserted since it's a SERIAL type
--- The product_id will be used in the following INSERT statements
+CREATE TABLE cart (
+    email VARCHAR(255) REFERENCES users(email) ON DELETE CASCADE,
+    product_id INT REFERENCES products(id) ON DELETE CASCADE,
+    quantity INT NOT NULL CHECK (quantity > 0),
+    PRIMARY KEY (email, product_id)
+);
 
--- Add an item to a user's cart in the CART table
--- Assuming that the SERIAL id given to the product above is 1
-INSERT INTO CART (email, product_id, quantity) VALUES ('user@example.com', 1, 2);
+CREATE TABLE explore (
+    id INT REFERENCES products(id) ON DELETE CASCADE
+);
 
--- Insert a product into the EXPLORE table
--- Assuming that the SERIAL id given to the product above is 1
-INSERT INTO EXPLORE (id) VALUES (1);
+CREATE TABLE selling (
+    email VARCHAR(255) REFERENCES users(email) ON DELETE CASCADE,
+    product_id INT REFERENCES products(id) ON DELETE CASCADE,
+    quantity INT NOT NULL CHECK (quantity > 0),
+    price INT NOT NULL CHECK (price >= 1),
+    PRIMARY KEY(email, product_id, quantity)
+);
 
--- Add an entry to the SELLING table
--- Assuming that the SERIAL id given to the product above is 1
-INSERT INTO SELLING (email, product_id, quantity, price) VALUES ('seller@example.com', 1, 5, 20);
-
--- Record a sale in the SOLD table
--- Assuming that the SERIAL id given to the product above is 1
-INSERT INTO SOLD (buyer_email, seller_email, date_sold, product_id, quantity) 
-VALUES ('buyer@example.com', 'seller@example.com', NOW(), 1, 1);
+CREATE TABLE sold (
+    buyer_email VARCHAR(255) REFERENCES users(email) ON DELETE CASCADE,
+    seller_email VARCHAR(255) REFERENCES users(email) ON DELETE CASCADE,
+    date_sold TIMESTAMP,
+    product_id INT REFERENCES products(id) ON DELETE CASCADE,
+    quantity INT NOT NULL CHECK (quantity > 0),
+    PRIMARY KEY(buyer_email, seller_email, date_sold, product_id, quantity)
+);
