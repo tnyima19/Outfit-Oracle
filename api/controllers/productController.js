@@ -1,0 +1,17 @@
+const express = require("express");
+const router = express.Router();
+const { Product } = require('../models'); 
+
+router.get("/", async (req, res) => {
+  try {
+    // const newProduct = await Product.create({ title: "Test Product" /* other fields */ });
+    const products = await Product.findAll();
+    console.log("products are: " + JSON.stringify(products))
+    res.json(products);
+  } catch (error) {
+    console.error("Error in /products route", error);
+    res.status(500).send("Error testing Products model");
+  }
+});
+
+module.exports = router;
