@@ -4,6 +4,7 @@ const { Product } = require("../models");
 const { Explore } = require("../models");
 const { Selling } = require("../models");
 const { Cart } = require("../models");
+const { Sold } = require("../models");
 
 router.get("/", async (req, res) => {
   try {
@@ -41,6 +42,15 @@ router.get("/cart", async (req, res) => {
     res.json(products);
   } catch (error) {
     res.status(500).send("error testing cart model");
+  }
+});
+
+router.get("/sold", async (req, res) => {
+  try {
+    const products = await Sold.findAll();
+    res.json(products);
+  } catch (error) {
+    res.status(500).send("error testing sold model");
   }
 });
 
