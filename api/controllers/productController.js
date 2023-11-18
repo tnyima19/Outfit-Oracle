@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Product } = require("../models");
 const { Explore } = require("../models");
+const { Selling } = require("../models");
 
 router.get("/", async (req, res) => {
   try {
@@ -21,6 +22,15 @@ router.get("/explore", async (req, res) => {
     res.json(products);
   } catch (error) {
     res.status(500).send("error testing explore model");
+  }
+});
+
+router.get("/selling", async (req, res) => {
+  try {
+    const products = await Selling.findAll();
+    res.json(products);
+  } catch (error) {
+    res.status(500).send("error testing selling model");
   }
 });
 
