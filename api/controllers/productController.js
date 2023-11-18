@@ -3,6 +3,7 @@ const router = express.Router();
 const { Product } = require("../models");
 const { Explore } = require("../models");
 const { Selling } = require("../models");
+const { Cart } = require("../models");
 
 router.get("/", async (req, res) => {
   try {
@@ -31,6 +32,15 @@ router.get("/selling", async (req, res) => {
     res.json(products);
   } catch (error) {
     res.status(500).send("error testing selling model");
+  }
+});
+
+router.get("/cart", async (req, res) => {
+  try {
+    const products = await Cart.findAll();
+    res.json(products);
+  } catch (error) {
+    res.status(500).send("error testing cart model");
   }
 });
 
