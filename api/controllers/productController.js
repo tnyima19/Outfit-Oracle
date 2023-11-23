@@ -5,6 +5,8 @@ const { Explore } = require("../models");
 const { Selling } = require("../models");
 const { Cart } = require("../models");
 const { Sold } = require("../models");
+const  authenticateToken = require("./authenticateToken");
+
 
 router.get("/", async (req, res) => {
   try {
@@ -36,14 +38,19 @@ router.get("/selling", async (req, res) => {
   }
 });
 
-router.get("/cart", async (req, res) => {
+
+
+const getCart = async (req, res) => {
   try {
-    const products = await Cart.findAll();
+    let email = req.user.email;
+    const products = await Cart.findOne({where:{email:email}});
     res.json(products);
   } catch (error) {
     res.status(500).send("error testing cart model");
   }
-});
+}
+
+router.get("/cart", authenticateToken, getCart);
 
 router.get("/sold", async (req, res) => {
   try {
