@@ -43,7 +43,7 @@ router.get("/selling", async (req, res) => {
 const getCart = async (req, res) => {
   try {
     let email = req.user.email;
-    const products = await Cart.findOne({where:{email:email}});
+    const products = await Cart.findAll({where:{email:email}});
     res.json(products);
   } catch (error) {
     res.status(500).send("error testing cart model");
