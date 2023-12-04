@@ -20,17 +20,7 @@ router.get("/", (req, res) => {
   MicroPost.findAll({}).then((allPosts) => res.json(allPosts));
 });
 
-router.post("/", (req, res) => {
-  let { content } = req.body;
 
-  MicroPost.create({ content })
-    .then((newPost) => {
-      res.status(201).json(newPost);
-    })
-    .catch((err) => {
-      res.status(400).json(err);
-    });
-});
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
@@ -62,16 +52,6 @@ router.put("/:id", (req, res) => {
   });
 });
 
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-  MicroPost.findByPk(id).then((mpost) => {
-    if (!mpost) {
-      return res.sendStatus(404);
-    }
 
-    mpost.destroy();
-    res.sendStatus(204);
-  });
-});
 
 module.exports = router;
