@@ -6,6 +6,7 @@ import Navbar from './Navbar/Navbar';
 import Home from './pages/Home.js';
 import LoginPage from './pages/LoginPage';
 import QuestionPage from './pages/QuestionPage';
+import SignUpPage from "./pages/SignUpPage.js";
 import "./App.css";
 
 
@@ -17,11 +18,11 @@ function App() {
       <div className="container-xl text-center">
         <div className="row justify-content-center">
           <Routes>
-            {/* <Route path="/posts/new" element={<PostFormPage />} /> */}
-            {/* <Route path="/posts/:id" element={<ShowPostPage />} /> */}
-            {/* <Route path="/question-page" element={<QuestionPage />} /> */}
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/login" element={<LoginPage />} /> 
+            <Route path="/question-page" element={<QuestionPage />} />
             <Route path="/about-us" element={<AboutUsPage />} />
-            <Route path="/" element={<LoginPage />} />
+            <Route path="/" element={<Home />} />
           </Routes>
         </div>
       </div>
