@@ -75,14 +75,14 @@ function SignUpPage(){
             return ;
         }
         try{
-            const respons = await axios.post(REGISTER_URL, JSON.stringify({user, pwd}), 
+            const respons = await axios.post('/api/singup', JSON.stringify({user, pwd}), 
                 {
                     headers: {'Content-Type': 'application/json'},
                     withCredentials: true
                 });
-                console.log(response.data);
-                console.log(response.accessToken);
-                console.log(JSON.stringify(response));
+                //console.log(response.data);
+                //console.log(response.accessToken);
+                //console.log(JSON.stringify(response));
                 setSuccess(true);
                 // clearr input fields
         }catch (err){

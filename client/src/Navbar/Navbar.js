@@ -9,10 +9,16 @@ function Navbar(props) {
           </Link>
           <ul className="navbar-nav me-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/about-us">
+              <Link className="nav-link" to="/cart">
                 Shopping Cart
               </Link>
             </li>
+            <li>
+              <Link className='nav-link' to="/about-us">
+              About Us
+              </Link>
+            </li>
+            
           </ul>
         </div>
       </nav>

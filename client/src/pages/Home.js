@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Card from '../components/Card';
+import Product from '../components/Product';
 import {products} from "../products";
 
 
@@ -37,7 +37,9 @@ function Home() {
          {/* <button onClick={inputChangeHandler}></button> */}
         <div className="card-group">
         {currProducts.map((entryData) => (
-          <Card {...entryData} key={entryData.id} />
+          <div className="col-md-3" key={entryData.id}> 
+          <Product {...entryData} key={entryData.id} />
+          </div>
         ))}
         
         </div>
