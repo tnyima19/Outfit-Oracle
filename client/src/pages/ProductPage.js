@@ -5,8 +5,8 @@ import { ShopContext } from '../context/ShopContext';
 function ProductPage() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
-    const { products } = useContext(ShopContext); // Assuming you have a list of products in your ShopContext
-
+    const { products, addToCart, cartItems } = useContext(ShopContext); // Assuming you have a list of products in your ShopContext
+    const cartItemAmount = cartItems[id];
     useEffect(() => {
         // Find the product with the given ID
         const foundProduct = products.find(p => p.id.toString() === id);
@@ -29,6 +29,7 @@ function ProductPage() {
             <p>Linning: {product.linning}</p>
             <p>Filling: {product.filling}</p>
             <p>Washing Info: {product.washinginfo}</p>
+            <button type="button" class="btn btn-secondary" onClick={()=> addToCart(id)}>Add to Cart {cartItemAmount > 0 && <>({cartItemAmount})</>}</button>
             {/* Other product details */}
         </div>
     );
