@@ -84,25 +84,25 @@ router.get("/filter", async (req, res) => {
       let queryConditions = {};
       
       if (size) {
-          queryConditions.size = size;
+          queryConditions.size = { [Op.in]: size };
       }
       if (styles) {
-          queryConditions.styles = { [Op.contains]: [styles] };
+          queryConditions.styles = { [Op.overlap]: styles };
       }
       if (gender) {
-          queryConditions.gender = gender;
+          queryConditions.gender = { [Op.in]: gender };
       }
       if (color) {
-          queryConditions.color = color;
+          queryConditions.color = { [Op.in]: color };
       }
       if (material) {
-          queryConditions.material = material;
+          queryConditions.material = { [Op.in]: material };
       }
       if (size_clothing) {
-          queryConditions.size_clothing = size_clothing;
+          queryConditions.size_clothing = { [Op.in]: size_clothing };
       }
       if (pattern) {
-          queryConditions.pattern = pattern;
+          queryConditions.pattern = { [Op.in]: pattern };
       }
 
       // Fetching the products
