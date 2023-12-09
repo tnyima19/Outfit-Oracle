@@ -25,10 +25,32 @@ async function findProductsByStyles(stylesArray) {
   }
 }
 
+async function findProductById(product_id)
+{
+   let product = await Product.findOne({where:
+  {
+    id: product_id
+  }});
+  return product;
+}
 
 router.get("/", async (req, res) => {
   try {
     const styles = req.body.styles;
+    const ids = req.body.product_ids;
+
+    if (ids != null) {
+      let allProds = [];
+      for (let id of ids) {
+          try {
+              let product = await findProductById(id);
+              allProds.push(product);
+          } catch (error) {
+              console.error('Error fetching product by id:', error);
+          }
+      }
+      return res.status(200).json(allProds);
+  }
 
     // If styles are provided, find products by styles
     if (styles != null) {
