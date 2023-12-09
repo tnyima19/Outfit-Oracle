@@ -1,29 +1,29 @@
--- Insert example data into Users
-INSERT INTO users (email, password) VALUES 
-('user1@example.com', 'password1'),
-('user2@example.com', 'password2');
+-- Inserting sample data into users table
+INSERT INTO users (email, password, styles) VALUES
+('alice@example.com', 'alicePass123', ARRAY['casual', 'streetwear']),
+('bob@example.com', 'bobPass123', ARRAY['formal', 'business']);
 
--- Insert example data into Products
-INSERT INTO products (description, title, category, styles, email) VALUES 
-('A cool t-shirt', 'Cool Shirt', ARRAY['clothing', 'casual'], ARRAY['modern', 'summer'], 'user1@example.com'),
-('An awesome pair of sneakers', 'Awesome Sneakers', ARRAY['footwear'], ARRAY['sporty', 'trendy'], 'user2@example.com');
+-- Inserting sample data into products table
+INSERT INTO products (description, title, gender, styles, img_url, color, material, size_clothing, pattern, email) VALUES
+('Comfortable and trendy streetwear hoodie', 'Street Hoodie', 'unisex', ARRAY['streetwear', 'casual'], 'http://example.com/hoodie.jpg', 'black', 'cotton', 'L', 'plain', 'alice@example.com'),
+('Formal business suit for professional settings', 'Business Suit', 'male', ARRAY['formal', 'business'], 'http://example.com/suit.jpg', 'navy', 'wool', '40', 'solid', 'bob@example.com');
 
--- Insert example data into Cart
-INSERT INTO cart (email, product_id, quantity) VALUES 
-('user1@example.com', 1, 2),
-('user2@example.com', 2, 1);
+-- Inserting sample data into cart table
+INSERT INTO cart (email, product_id, quantity) VALUES
+('alice@example.com', 1, 1),
+('bob@example.com', 2, 1);
 
--- Insert example data into Explore
-INSERT INTO explore (id) VALUES 
+-- Inserting sample data into explore table
+INSERT INTO explore (id) VALUES
 (1),
 (2);
 
--- Insert example data into Selling
-INSERT INTO selling (email, product_id, quantity, price) VALUES 
-('user1@example.com', 1, 5, 20),
-('user2@example.com', 2, 3, 50);
+-- Inserting sample data into selling table
+INSERT INTO selling (email, product_id, quantity, price) VALUES
+('alice@example.com', 1, 10, 50),
+('bob@example.com', 2, 5, 150);
 
--- Insert example data into Sold
-INSERT INTO sold (buyer_email, seller_email, date_sold, product_id, quantity) VALUES 
-('user2@example.com', 'user1@example.com', '2023-01-01 10:00:00', 1, 1),
-('user1@example.com', 'user2@example.com', '2023-01-02 15:30:00', 2, 1);
+-- Inserting sample data into sold table
+INSERT INTO sold (buyer_email, seller_email, date_sold, product_id, quantity) VALUES
+('bob@example.com', 'alice@example.com', '2023-12-05 09:00:00', 1, 1),
+('alice@example.com', 'bob@example.com', '2023-12-06 15:30:00', 2, 1);
