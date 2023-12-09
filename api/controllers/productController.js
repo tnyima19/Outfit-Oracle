@@ -6,19 +6,52 @@ const { Selling } = require("../models");
 const { Cart } = require("../models");
 const { Sold } = require("../models");
 const  authenticateToken = require("./authenticateToken");
+const {Op} = require('sequelize');
+
+async function findProductsByStyles(stylesArray) {
+  try {
+      const products = await Product.findAll({
+          where: {
+              styles: {
+                  [Op.overlap]: stylesArray
+              }
+          }
+      });
+
+      return products;
+  } catch (error) {
+      console.error('Error fetching products:', error);
+      throw error;
+  }
+}
 
 
 router.get("/", async (req, res) => {
   try {
-    // const newProduct = await Product.create({ title: "Test Product" /* other fields */ });
+    const styles = req.body.styles;
+
+    // If styles are provided, find products by styles
+    if (styles != null) {
+      try {
+        const productsByStyles = await findProductsByStyles(styles);
+        console.log("Filtered products are: " + JSON.stringify(productsByStyles));
+        return res.status(200).json(productsByStyles);
+      } catch (error) {
+        console.error('Error:', error);
+        return res.status(500).send("Error fetching products by styles");
+      }
+    }
+
+    // If no styles are provided, find all products
     const products = await Product.findAll();
-    console.log("products are: " + JSON.stringify(products));
-    res.json(products);
+    console.log("All products are: " + JSON.stringify(products));
+    return res.json(products);
   } catch (error) {
     console.error("Error in /products route", error);
-    res.status(500).send("Error testing Products model");
+    return res.status(500).send("Error testing Products model");
   }
 });
+
 
 router.get("/explore", async (req, res) => {
   try {
