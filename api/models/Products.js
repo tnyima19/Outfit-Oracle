@@ -14,13 +14,33 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    gender: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    img_url: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    color: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    material: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    size_clothing: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    pattern: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     title: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    category: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: true
     },
     styles: {
       type: DataTypes.ARRAY(DataTypes.STRING),

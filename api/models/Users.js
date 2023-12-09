@@ -14,6 +14,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      styles: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true
+      }
     },
     {
       sequelize,
