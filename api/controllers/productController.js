@@ -53,6 +53,49 @@ router.get("/", async (req, res) => {
 });
 
 
+router.get("/filter", async (req, res) => {
+  try {
+      // Extracting query parameters
+      const { size, styles, gender, color, material, size_clothing, pattern } = req.body;
+
+      // Building the query conditionally
+      let queryConditions = {};
+      
+      if (size) {
+          queryConditions.size = size;
+      }
+      if (styles) {
+          queryConditions.styles = { [Op.contains]: [styles] };
+      }
+      if (gender) {
+          queryConditions.gender = gender;
+      }
+      if (color) {
+          queryConditions.color = color;
+      }
+      if (material) {
+          queryConditions.material = material;
+      }
+      if (size_clothing) {
+          queryConditions.size_clothing = size_clothing;
+      }
+      if (pattern) {
+          queryConditions.pattern = pattern;
+      }
+
+      // Fetching the products
+      const products = await Product.findAll({
+          where: queryConditions
+      });
+
+      // Returning the products
+      return res.status(200).json(products);
+  } catch (error) {
+      console.error("Error in /filter route", error);
+      return res.status(500).send("Error fetching filtered products");
+  }
+});
+
 router.get("/explore", async (req, res) => {
   try {
     const products = await Explore.findAll();
