@@ -41,6 +41,8 @@ function generateAccessToken(user) {
 const createAccount = async (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
+  let userStyle = req.body.styles;
+  console.log("user style is " + userStyle);
   // const userExists = await pool.query(queries.checkUserExists, [email]);
   const userExists = await Users.findOne({where: {email:email}});
   console.log("user exists returning:  " + userExists);
@@ -51,7 +53,7 @@ const createAccount = async (req, res) => {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     // await pool.query(queries.addUser, [`${email}`, `${hashedPassword}`]);
-    Users.create({email:email, password:hashedPassword})
+    Users.create({email:email, password:hashedPassword,styles:userStyle})
     console.log("encrypted password and added to db");
     return res.status(201).send("encrypted password and added to db");
   }
