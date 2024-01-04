@@ -80,9 +80,9 @@ function SignUpPage(){
                     headers: {'Content-Type': 'application/json'},
                     withCredentials: true
                 });
-                console.log(response.data);
-                console.log(response.accessToken);
-                console.log(JSON.stringify(response));
+                // console.log(response.data);
+                // console.log(response.accessToken);
+                // console.log(JSON.stringify(response));
                 setSuccess(true);
                 // clearr input fields
         }catch (err){
