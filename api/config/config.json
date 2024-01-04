@@ -3,8 +3,9 @@
     "username": "ctp_user",
     "password": "ctp_pass",
     "database": "outfitoracleDB",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "host": "host.docker.internal",
+    "dialect": "postgres",
+    "port": 5433
   },
   "test": {
     "username": "ctp_user",
