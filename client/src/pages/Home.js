@@ -39,6 +39,7 @@ function Home() {
         {currProducts.map((entryData) => (
           <Card {...entryData} key={entryData.id} />
         ))}
+        
         </div>
       </div>
     </div>

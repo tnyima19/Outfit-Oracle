@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    image: clasher/outfit-oracle-backend
+    ports:
+      - "8089:8089"
+    depends_on:
+      - db
+
+  frontend:
+    image: clasher/outfitoracle-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  db:
+    image: clasher/outfit-oracle-db
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: outfitoracleDB
+      POSTGRES_USER: ctp_user
+      POSTGRES_PASSWORD: ctp_pass
+# gets images from the cloud

@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: api
+      dockerfile: Dockerfile
+    ports:
+      - "8089:8089"
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  db:
+    build:
+      context: postgresDocker
+      dockerfile: Dockerfile
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: outfitoracleDB
+      POSTGRES_USER: ctp_user
+      POSTGRES_PASSWORD: ctp_pass
+# uses local images
+# docker-compose -f local_docker-compose.yml up
